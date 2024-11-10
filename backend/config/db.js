@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 // Enable dotenv
 dotenv.config();
 
-const conectarDB = async () => {
+const connectDB = async () => {
   try {
     const db = await mongoose.connect(process.env.DATABASE);
 
@@ -18,4 +18,4 @@ const conectarDB = async () => {
   }
 };
 
-export default conectarDB;
+export default connectDB;
