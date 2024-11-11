@@ -5,6 +5,9 @@ import veterinanRoutes from './routes/veterinarianRoutes.js';
 const app = express();
 connectDB();
 
+// Allows to parse request bodies
+app.use(express.json());
+
 const PORT = process.env.PORT || 4000;
 
 app.use('/api/veterinarians', veterinanRoutes);
