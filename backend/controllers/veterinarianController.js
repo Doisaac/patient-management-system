@@ -26,4 +26,27 @@ const profile = (req, res) => {
   res.json({ msg: 'Showing profile...' });
 };
 
-export { register, profile };
+const confirm = async (req, res) => {
+  const { token } = req.params;
+
+  const userRegistered = await Veterinarian.findOne({ token });
+
+  if (!userRegistered) {
+    const error = new Error('The token is not valid');
+    return res.status(400).json({ msg: error.message });
+  }
+
+  // Updates the user in the database
+  try {
+    userRegistered.confirmed = true;
+    userRegistered.token = null;
+
+    await userRegistered.save();
+
+    res.json({ msg: 'User successfully confirmed' });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export { register, profile, confirm };
