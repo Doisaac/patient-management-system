@@ -49,4 +49,23 @@ const confirm = async (req, res) => {
   }
 };
 
-export { register, profile, confirm };
+const authenticate = async (req, res) => {
+  const { email } = req.body;
+
+  // Validates if the email exist
+  const user = await Veterinarian.findOne({ email });
+
+  if (!user) {
+    const error = new Error('The user does not exist');
+    return res.status(404).json({ msg: error.message });
+  } 
+
+  // Validates if the user is not yet confirmed
+  if (!user.confirmed) {
+    const error = new Error('The account is not yet confirmed');
+    return res.status(403).json({ msg: error.message });
+  }
+
+}
+
+export { register, profile, confirm, authenticate };
