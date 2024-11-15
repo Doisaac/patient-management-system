@@ -1,4 +1,5 @@
 import Veterinarian from '../models/Veterinarian.js';
+import generateJWT from '../helpers/generateJWT.js';
 
 const register = async (req, res) => {
   const { email } = req.body;
@@ -50,7 +51,7 @@ const confirm = async (req, res) => {
 };
 
 const authenticate = async (req, res) => {
-  const { email } = req.body;
+  const { email, password } = req.body;
 
   // Validates if the email exist
   const user = await Veterinarian.findOne({ email });
@@ -66,6 +67,14 @@ const authenticate = async (req, res) => {
     return res.status(403).json({ msg: error.message });
   }
 
+  // Validates password 
+  if (await user.checkPassword(password)) {
+    // Authenticates 
+    res.json({ token: generateJWT(user._id) });
+  } else {
+    const error = new Error('The password is incorrect');
+    return res.status(403).json({ msg: error.message });
+  }
 }
 
 export { register, profile, confirm, authenticate };
