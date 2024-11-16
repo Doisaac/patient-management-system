@@ -24,7 +24,9 @@ const register = async (req, res) => {
 };
 
 const profile = (req, res) => {
-  res.json({ msg: 'Showing profile...' });
+  const { veterinarian } = req;
+
+  res.json({ "profile": veterinarian });
 };
 
 const confirm = async (req, res) => {
