@@ -99,8 +99,20 @@ const forgetPassword = async (req, res) => {
   }
 };
 
-const checkPasswordToken = (req, res) => {
+const checkPasswordToken = async (req, res) => {
 
+  const { token } = req.params;
+
+  const veterinarian = await Veterinarian.findOne({ token });
+  
+  if (veterinarian) {
+    // The token is valid
+    res.json({ msg: 'The token is valid and user exists' });
+  } else {
+    const error = new Error('Token no válido');
+    return res.status(400).json({ msg: error.message });
+  }
+  console.log(veterinarian);
 };
 
 const saveNewPassword = (req, res) => {
