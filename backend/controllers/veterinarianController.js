@@ -30,6 +30,7 @@ const profile = (req, res) => {
   res.json({ "profile": veterinarian });
 };
 
+// Confirms the account that has been created
 const confirm = async (req, res) => {
   const { token } = req.params;
 
@@ -53,6 +54,7 @@ const confirm = async (req, res) => {
   }
 };
 
+// Authenticates the account when login
 const authenticate = async (req, res) => {
   const { email, password } = req.body;
 
@@ -80,6 +82,7 @@ const authenticate = async (req, res) => {
   }
 }
 
+// Gives a token to change the password 
 const forgetPassword = async (req, res) => {
   const { email } = req.body;
   
