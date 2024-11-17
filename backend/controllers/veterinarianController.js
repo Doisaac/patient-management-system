@@ -1,5 +1,6 @@
 import Veterinarian from '../models/Veterinarian.js';
 import generateJWT from '../helpers/generateJWT.js';
+import generateId from '../helpers/generateId.js';
 
 const register = async (req, res) => {
   const { email } = req.body;
@@ -79,4 +80,39 @@ const authenticate = async (req, res) => {
   }
 }
 
-export { register, profile, confirm, authenticate };
+const forgetPassword = async (req, res) => {
+  const { email } = req.body;
+  
+  const veterinarian = await Veterinarian.findOne({ email });
+
+  if (!veterinarian) {
+    const error = new Error('The user does not exist');
+    return res.status(400).json({ msg: error.message });
+  }
+  
+  try {
+    veterinarian.token = generateId();
+    await veterinarian.save();
+    return res.json({ msg: 'We have sent you an email with the instructions' });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const checkPasswordToken = (req, res) => {
+
+};
+
+const saveNewPassword = (req, res) => {
+
+};
+
+export {
+  register,
+  profile,
+  confirm,
+  authenticate,
+  forgetPassword,
+  checkPasswordToken,
+  saveNewPassword,
+};
