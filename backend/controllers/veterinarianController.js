@@ -114,7 +114,26 @@ const checkPasswordToken = async (req, res) => {
   }
 };
 
-const saveNewPassword = (req, res) => {
+const saveNewPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  const veterinarian = await Veterinarian.findOne({ token });
+
+  if (!veterinarian) {
+    const error = new Error('There was an error, try again');
+    return res.status(400).json({ msg: error.message });
+  } 
+  
+  try {
+    veterinarian.token = null;
+    veterinarian.password = password;
+    await veterinarian.save();
+    
+    return res.json({ msg: 'The password has been changed correctly' })
+  } catch (error) {
+    console.log(error);
+  }
 
 };
 
