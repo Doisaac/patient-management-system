@@ -112,7 +112,6 @@ const checkPasswordToken = async (req, res) => {
     const error = new Error('Token no válido');
     return res.status(400).json({ msg: error.message });
   }
-  console.log(veterinarian);
 };
 
 const saveNewPassword = (req, res) => {
