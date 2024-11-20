@@ -17,6 +17,7 @@ const PatientSchema = mongoose.Schema(
     dischargeDate: {
       type: Date,
       required: true,
+      default: Date.now(),
     },
     symptoms: {
       type: String,
