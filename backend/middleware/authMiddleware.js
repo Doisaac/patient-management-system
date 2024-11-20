@@ -12,7 +12,7 @@ const checkAuth = async (req, res, next) => {
       
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      req.veterinarian = await Veterinarian.findById(decoded.userId).select("-password -tok -confirmed");
+      req.veterinarian = await Veterinarian.findById(decoded.userId).select("-password -token -confirmed");
 
       return next();
       
