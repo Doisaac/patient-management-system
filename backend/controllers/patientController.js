@@ -31,8 +31,8 @@ const getPatient = async (req, res) => {
     return res.json({ msg: 'The patient id is not valid' });
   }
 
-  const patientId = patient.veterinarianID.toString();
-  const patientIdFromRequest = req.veterinarian._id.toString();
+  const veterinarianId = patient.veterinarianID.toString();
+  const veterinarianIdFromRequest = req.veterinarian._id.toString();
 
   if (patientId !== patientIdFromRequest ) {
     return res.json({ msg: 'Invalid action' });
