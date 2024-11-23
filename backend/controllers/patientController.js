@@ -76,8 +76,35 @@ const editPatient = async (req, res) => {
 };
 
 const deletePatient = async (req, res) => {
+  const { id } = req.params;
+  let patient;
 
+  // Gets the patient
+  try {
+    patient = await Patient.findById(id);
+  } catch (error) {
+    return res.status(404).json({ msg: 'There was an error with the patient id' });
+  }
+
+  if (!patient) {
+    return res.status(404).json({ msg: 'The patient was not found' });
+  }
+
+  if (
+    patient.veterinarianID.toString() !== 
+    req.veterinarian._id.toString()
+  ) {
+    return res.json({ msg: 'Invalid action' });
+  }
+
+  try {
+    await patient.deleteOne();
+    res.json({ msg: 'Patient deleted successfully' });
+  } catch (error) {
+    res.json({ msg: 'There was an error deleting the patient' });
+  }
 };
+
 export {
   addPatient,
   getPatients,
