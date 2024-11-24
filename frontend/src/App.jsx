@@ -1,7 +1,9 @@
 function App() {
 
   return (
-    <h1>Hello VIT</h1>
+    <h1 className="font-extrabold text-2xl text-indigo-500"> 
+      Hello VIT
+    </h1>
   )
 }
 
