@@ -28,13 +28,17 @@ const getPatient = async (req, res) => {
   try {
     patient = await Patient.findById(id)
   } catch (error) {
-    return res.json({ msg: 'The patient id is not valid' });
+    return res.status(404).json({ msg: 'There was an error' });
   }
 
-  const veterinarianId = patient.veterinarianID.toString();
-  const veterinarianIdFromRequest = req.veterinarian._id.toString();
+  if (!patient) {
+    return res.status(404).json({ msg: 'The patient was not found' });
+  }
 
-  if (veterinarianId !== veterinarianIdFromRequest ) {
+  if (
+    patient.veterinarianID.toString() !== 
+    req.veterinarian._id.toString()
+  ) {
     return res.json({ msg: 'Invalid action' });
   }
 
