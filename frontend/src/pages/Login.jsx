@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
+
 const Login = () => {
   return (
     <>
       <div>
-        <h1 className="text-indigo-600 font-black text-6xl">
+        <h1 className="text-indigo-600 font-black text-6xl text-pretty">
           Log in and Manage your 
           <span className="text-black"> Patients</span>
         </h1>
@@ -43,8 +45,24 @@ const Login = () => {
             value="Login"
             className="bg-indigo-700 w-full py-3 rounded-xl text-white uppercase font-bold mt-5 cursor-pointer hover:bg-indigo-900 transition-colors ease-in-out duration-700 md:w-auto px-12"
           />
-
         </form>
+
+        <nav className='mt-10 lg:flex lg:justify-between'>
+          <Link 
+            className='block text-center my-5 text-gray-500'
+            to="/register"
+          >
+            Don't you have an account yet? Sign up
+          </Link>
+
+          <Link
+            className='block text-center my-5 text-gray-500'
+            to="/forget-password"
+          >
+            Forgot your password? Reset it here
+          </Link>
+        </nav>
+
       </div>
     </>
   );
