@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
+import Alert from '../components/Alert.jsx';
 
 const Register = () => {
   // Hooks - State
@@ -7,7 +8,29 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPasswod, setConfirmPassword] = useState('');
+  const [alert, setAlert] = useState({});
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if ([name, email, password, confirmPasswod].map(field => field.trim()).includes('')) {
+      setAlert({ msg: 'Complete all the fields', error: true});
+      return;
+    }
+
+    if (password !== confirmPasswod) {
+      setAlert({ msg: 'Passwords are not the same', error: true});
+      return;
+    }
+
+    if (password.length < 6) {
+      setAlert({ msg: 'Password is too short, add at least 6 characters', error: true});
+      return;
+    }
+
+    setAlert({});
+
+  };
 
   return (
     <>
@@ -19,7 +42,12 @@ const Register = () => {
       </div>
 
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
-        <form action="">
+        
+        {alert.msg && <Alert alertObj={alert}/>}
+
+        <form 
+          onSubmit={handleSubmit}
+        >
           <div className="my-5">
             <label className="uppercase text-gray-500 block text-xl font-bold">
               Name:
