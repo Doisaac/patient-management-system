@@ -13,8 +13,10 @@ const addPatient = async (req, res) => {
 };
 
 const getPatients = async (req, res) => {
+  let patients;
+
   try {
-    const patients = await Patient.find()
+    patients = await Patient.find()
     .where('veterinarianID')
     .equals(req.veterinarian.id);
   } catch (error) {
@@ -24,7 +26,7 @@ const getPatients = async (req, res) => {
   if (patients === null) {
     return res.json({ msg: 'No patients yet' });
   }
-  
+
   res.json(patients);
 };
 
