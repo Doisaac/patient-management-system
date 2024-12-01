@@ -12,5 +12,4 @@ const registerEmail = () => {
   });  
 }
 
-
-export default transporter;
+export default registerEmail;
