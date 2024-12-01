@@ -1,9 +1,10 @@
 import Veterinarian from '../models/Veterinarian.js';
 import generateJWT from '../helpers/generateJWT.js';
 import generateId from '../helpers/generateId.js';
+import registerEmail from '../helpers/registerEmail.js'
 
 const register = async (req, res) => {
-  const { email } = req.body;
+  const { email, name } = req.body;
   // Prevents duplicated users
   const userExists = await Veterinarian.findOne({ email });
 
@@ -16,6 +17,13 @@ const register = async (req, res) => {
     // Saves a new veterinarian
     const veterinarian = new Veterinarian(req.body);
     const saveVeterinarian = await veterinarian.save();
+    
+    // Sends the registration email
+    registerEmail({
+      email,
+      name,
+      token: saveVeterinarian.token
+    });
 
     // Shows the veterinarian data as a JSON response
     res.json(saveVeterinarian);
