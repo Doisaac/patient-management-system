@@ -14,13 +14,12 @@ const ConfirmAccount = () => {
     const confirmAccount = async () => {
       try {
         const { data } = await axios(
-          `http://localhost:4000/api/veterinarians/confirm/${token}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/veterinarians/confirm/${token}`
         );
+
         setConfirmedAccount(true);
         setAlert({ msg: data.msg, error: false });
       } catch (error) {
-        console.log('errorrrrr entrooooooo');
-        console.log(error);
         setAlert({ msg: error.response.data.msg, error: true });
       }
       setLoading(false);
