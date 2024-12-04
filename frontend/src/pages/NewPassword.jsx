@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect} from 'react';
+import { useParams, Link } from 'react-router-dom';
 import Alert from '../components/Alert';
 import axiosClient from '../config/axios';
 
@@ -8,6 +8,7 @@ const NewPassword = () => {
   const [alert, setAlert] = useState({});
   const { token } = useParams();
   const [validToken, setValidToken] = useState(false);
+  const [modifiedPassword, setModifiedPassword] = useState(false);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -40,7 +41,8 @@ const NewPassword = () => {
     try {
       const URL = `/veterinarians/forgetpassword/${token}`;
 
-      const {data} = await axiosClient.post(URL, { password });
+      const { data } = await axiosClient.post(URL, { password });
+      setModifiedPassword(true);
       setAlert({ msg: data.msg, error: false });
     } catch (error) {
       setAlert({
@@ -63,27 +65,40 @@ const NewPassword = () => {
         {alert.msg && <Alert alertObj={alert} />}
 
         {validToken && (
-          <form onSubmit={handleSubmit}>
-            <div className="my-5">
-              <label className="uppercase text-gray-500 block text-xl font-bold">
-                New Password
-              </label>
+          <>
+            <form onSubmit={handleSubmit}>
+              <div className="my-5">
+                <label className="uppercase text-gray-500 block text-xl font-bold">
+                  New Password
+                </label>
+
+                <input
+                  type="password"
+                  placeholder="Your new password"
+                  className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
 
               <input
-                type="password"
-                placeholder="Your new password"
-                className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="submit"
+                value="Save New Password"
+                className="bg-indigo-700 w-full py-3 rounded-xl text-white uppercase font-bold mt-5 cursor-pointer hover:bg-indigo-900 transition-colors ease-in-out duration-700 md:w-auto px-12"
               />
-            </div>
+            </form>
 
-            <input
-              type="submit"
-              value="Save New Password"
-              className="bg-indigo-700 w-full py-3 rounded-xl text-white uppercase font-bold mt-5 cursor-pointer hover:bg-indigo-900 transition-colors ease-in-out duration-700 md:w-auto px-12"
-            />
-          </form>
+            <nav className="mt-10 lg:flex lg:justify-between">
+              {modifiedPassword && (
+                <Link
+                  className="block text-center my-5 text-gray-500"
+                  to="/"
+                >
+                  Log in
+                </Link>
+              )}
+            </nav>
+          </>
         )}
       </div>
     </>
