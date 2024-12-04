@@ -23,6 +23,33 @@ const NewPassword = () => {
     checkToken();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password === '') {
+      setAlert({ msg: 'Please complete the field', error: true });
+      return;
+    } else if (password.length < 6) {
+      setAlert({
+        msg: 'Password is too short, add at least 6 characters',
+        error: true,
+      });
+      return;
+    }
+
+    try {
+      const URL = `/veterinarians/forgetpassword/${token}`;
+
+      const {data} = await axiosClient.post(URL, { password });
+      setAlert({ msg: data.msg, error: false });
+    } catch (error) {
+      setAlert({
+        msg: error.response.data.msg,
+        error: true,
+      });
+    }
+  };
+
   return (
     <>
       <div>
@@ -36,7 +63,7 @@ const NewPassword = () => {
         {alert.msg && <Alert alertObj={alert} />}
 
         {validToken && (
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="my-5">
               <label className="uppercase text-gray-500 block text-xl font-bold">
                 New Password
