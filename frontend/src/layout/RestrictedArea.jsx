@@ -1,4 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom"
+import Header from "../components/Header";
+import Footer from "../components/footer";
 import useAuth from '../hooks/useAuth'
 
 const RestrictedArea = () => {
@@ -10,9 +12,9 @@ const RestrictedArea = () => {
   
   return (
     <>
-    <h1 className="font-bold text-2xl p-2 bg-green-400">This is a restricted area</h1>
-
+    <Header />
     {auth._id ? <Outlet/> : <Navigate to="/" /> }
+    <Footer />
   </>
   )
 }
