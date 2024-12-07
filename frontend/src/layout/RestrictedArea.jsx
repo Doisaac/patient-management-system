@@ -12,11 +12,17 @@ const RestrictedArea = () => {
   
   return (
     <>
-    <Header />
-    {auth._id ? <Outlet/> : <Navigate to="/" /> }
-    <Footer />
-  </>
-  )
+      <Header />
+      {auth._id ? (
+        <main className="container mt-10 mx-auto">
+          <Outlet />
+        </main>
+      ) : (
+        <Navigate to="/" />
+      )}
+      <Footer />
+    </>
+  );
 }
 
 export default RestrictedArea
