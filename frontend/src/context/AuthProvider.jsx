@@ -38,12 +38,18 @@ const AuthProvider = ({ children }) => {
     authenticateUser();
   }, []);
 
+  const logOut = () => {
+    localStorage.removeItem('token');
+    setAuth({});
+  }
+
   return (
     <AuthContext.Provider 
       value={{
         auth,
         setAuth,
-        loading
+        loading,
+        logOut
       }}
     >
       { children }
