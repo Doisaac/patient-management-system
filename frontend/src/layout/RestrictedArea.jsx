@@ -5,7 +5,7 @@ import useAuth from '../hooks/useAuth'
 
 const RestrictedArea = () => {
   const { auth, loading } = useAuth();
-  console.log('restricted area component');
+  
   if (loading) {
     return 'cargando';
   }
