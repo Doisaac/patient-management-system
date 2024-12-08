@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useAuth from '../hooks/useAuth.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../components/Alert.jsx';
 import axiosClient from '../config/axios.jsx';
@@ -7,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [alert, setAlert] = useState({});
+  const { setAuth } = useAuth();
   
   const navigate = useNavigate();
 
@@ -21,10 +23,11 @@ const Login = () => {
     }
 
     try {
-      const { data: {token} } = await axiosClient.post('/veterinarians/login', { email, password});
+      const { data } = await axiosClient.post('/veterinarians/login', { email, password});
 
       // Saves the token
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', data.token);
+      setAuth(data);
 
       navigate('/admin');
     } catch (error) {

@@ -7,6 +7,8 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading ] = useState(true);
   const [auth, setAuth] = useState({});
 
+  console.log('provider component');
+
   useEffect(() => {
     const authenticateUser = async () => {
       const token = localStorage.getItem('token');
