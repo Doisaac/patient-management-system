@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Alert from '../components/Alert';
 
 function Form() {
   const [name, setName] = useState('');
@@ -6,8 +7,23 @@ function Form() {
   const [email, setEmail] = useState('');
   const [dischargeDate, setDischargeDate] = useState('');
   const [symptoms, setSymptoms] = useState('');
-  
+
   const [alert, setAlert] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const fields = [name, owner, email, dischargeDate, symptoms].map((field) =>
+      field.trim()
+    );
+
+    if (fields.includes('')) {
+      setAlert({ msg: 'Complete the fields', error: true });
+      return;
+    }
+
+    setAlert({});
+  };
 
   return (
     <>
@@ -16,7 +32,10 @@ function Form() {
         <span className="text-indigo-600 font-bold">manage them</span>
       </p>
 
-      <form className="bg-white py-10 px-5 mb-10 md:mb-0 shadow-md rounded-md">
+      <form
+        className="bg-white py-10 px-5 mb-10 md:mb-5 shadow-md rounded-md"
+        onSubmit={handleSubmit}
+      >
         <div className="mb-5">
           <label
             htmlFor="pet"
@@ -107,6 +126,8 @@ function Form() {
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-colors"
         />
       </form>
+
+      {alert.msg && <Alert alertObj={alert} />}
     </>
   );
 }
