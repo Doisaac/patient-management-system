@@ -1,4 +1,14 @@
+import { useState } from 'react';
+
 function Form() {
+  const [name, setName] = useState('');
+  const [owner, setOwner] = useState('');
+  const [email, setEmail] = useState('');
+  const [dischargeDate, setDischargeDate] = useState('');
+  const [symptoms, setSymptoms] = useState('');
+  
+  const [alert, setAlert] = useState({});
+
   return (
     <>
       <p className="text-lg text-center mb-10">
@@ -19,6 +29,8 @@ function Form() {
             type="text"
             placeholder="Your pet's name"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
@@ -34,6 +46,8 @@ function Form() {
             type="text"
             placeholder="Pet owner name"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={owner}
+            onChange={(e) => setOwner(e.target.value)}
           />
         </div>
 
@@ -49,6 +63,8 @@ function Form() {
             type="text"
             placeholder="Owner email"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -64,6 +80,8 @@ function Form() {
             type="date"
             placeholder="pet discharge date"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={dischargeDate}
+            onChange={(e) => setDischargeDate(e.target.value)}
           />
         </div>
 
@@ -78,6 +96,8 @@ function Form() {
             id="symptoms"
             placeholder="pet symptoms"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+            value={symptoms}
+            onChange={(e) => setSymptoms(e.target.value)}
           />
         </div>
 
