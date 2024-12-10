@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Alert from '../components/Alert';
+import usePatients from '../hooks/usePatients'
 
 function Form() {
   const [name, setName] = useState('');
@@ -9,6 +10,8 @@ function Form() {
   const [symptoms, setSymptoms] = useState('');
 
   const [alert, setAlert] = useState({});
+
+  const { savePatient } = usePatients();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +26,8 @@ function Form() {
     }
 
     setAlert({});
+
+    savePatient({name, owner, email, symptoms});
   };
 
   return (
