@@ -79,7 +79,7 @@ function Form() {
           </label>
           <input
             id="email"
-            type="text"
+            type="email"
             placeholder="Owner email"
             className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
             value={email}
