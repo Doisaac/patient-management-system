@@ -1,5 +1,8 @@
+import usePatients from '../hooks/usePatients';
+
 const Patient = ({ patient }) => {
   const { name, email, dischargeDate, owner, symptoms, _id } = patient;
+  const { setEdition } = usePatients();
 
   const formatDate = (date) => {
     const newDate = new Date(date);
@@ -37,6 +40,7 @@ const Patient = ({ patient }) => {
         <button
           type='button'
           className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white uppercase font-bold rounded-lg"
+          onClick={() => setEdition(patient)}
         >
           Edit
         </button>
