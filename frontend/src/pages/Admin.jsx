@@ -20,7 +20,7 @@ const Admin = () => {
           <Form />
         </div>
         
-        <div className="md:w-1/2 lg:w-2/5">
+        <div className="md:w-1/2 lg:w-3/5">
           <PatientList />
         </div>
       </div>
