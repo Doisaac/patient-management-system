@@ -32,13 +32,17 @@ function Form() {
 
   return (
     <>
-      <p className="text-lg text-center mb-10">
-        Add your patients and {''}
-        <span className="text-indigo-600 font-bold">manage them</span>
+      <h2 className="font-black text-3xl text-center">Patient Management</h2>
+
+      <p className="text-xl mt-5 text-center">
+       Add your Patients and {''}
+        <span className="text-indigo-600 font-bold">
+          Manage Them
+        </span>
       </p>
 
       <form
-        className="bg-white py-10 px-5 mb-10 md:mb-5 shadow-md rounded-md"
+        className="bg-white py-10 px-5 mb-10 md:mb-5 shadow-md rounded-md my-10"
         onSubmit={handleSubmit}
       >
         <div className="mb-5">
