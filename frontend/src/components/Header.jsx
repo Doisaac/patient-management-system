@@ -22,7 +22,7 @@ const Header = () => {
           </Link>
 
           <Link
-            to="/admin"
+            to="profile"
             className="text-white text-sm uppercase font-bold"
           >
             Profile
