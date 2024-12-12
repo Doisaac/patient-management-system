@@ -9,6 +9,8 @@ import ForgetPassword from './pages/ForgetPassword'
 import ConfirmAccount from './pages/ConfirmAccount'
 import NewPassword from './pages/NewPassword'
 import Admin from './pages/admin.jsx'
+import EditProfile from './pages/EditProfile.jsx'
+import ChangePassword from './pages/changePassword.jsx'
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
 
             <Route path="/admin" element={<RestrictedArea />}>
               <Route index element={<Admin/>}/>
+              <Route path="profile" element={<EditProfile />} />
+              <Route path="change-password" element={<ChangePassword />} />
             </Route>
           </Routes>
         </PatientsProvider>
