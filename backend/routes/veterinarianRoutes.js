@@ -6,7 +6,8 @@ import {
   authenticate,
   forgetPassword,
   checkPasswordToken,
-  saveNewPassword
+  saveNewPassword,
+  updateProfile
 } from '../controllers/veterinarianController.js';
 import checkAuth from '../middleware/authMiddleware.js';
 
@@ -21,5 +22,6 @@ router.route('/forgetPassword/:token').get(checkPasswordToken).post(saveNewPassw
 
 // Private area
 router.get('/profile', checkAuth, profile);
+router.put('/profile/:id', checkAuth, updateProfile)
 
 export default router;

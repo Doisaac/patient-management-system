@@ -162,6 +162,38 @@ const saveNewPassword = async (req, res) => {
 
 };
 
+const updateProfile = async (req, res) => {
+  const veterinarian = await Veterinarian.findById(req.params.id);
+
+  if (!veterinarian) {
+    const error = new Error('There was an error');
+    return res.status(400).json({ msg: error.msg });
+  }
+
+  const { email } = req.body;
+  if (veterinarian.email !== email) {
+    const emailExist = await Veterinarian.findOne({ email });
+    if (emailExist) {
+      const error = new Error('That email address is already used');
+      return res.status(400).json({ msg: error.msg });
+    }
+  }
+
+  try {
+    // Updates the properties
+    veterinarian.name = req.body.name || veterinarian.name;
+    veterinarian.email = req.body.email || veterinarian.email;
+    veterinarian.web = req.body.web;
+    veterinarian.phoneNumber = req.body.phoneNumber;
+    
+    const updatedProfile = await veterinarian.save();
+
+    res.json(updatedProfile);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export {
   register,
   profile,
@@ -170,4 +202,5 @@ export {
   forgetPassword,
   checkPasswordToken,
   saveNewPassword,
+  updateProfile
 };

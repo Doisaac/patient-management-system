@@ -1,6 +1,37 @@
+import { useEffect, useState } from 'react';
 import AdminNav from '../components/AdminNav';
+import useAuth from '../hooks/useAuth'
+import Alert from '../components/Alert';
 
 const EditProfile = () => {
+  const { auth, updateProfile } = useAuth();
+  const [ profile, setProfile ] = useState({});
+  const [ alert, setAlert ] = useState({}); 
+  
+  useEffect(()=>{
+    setProfile(auth);
+  }, [auth]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const {name, email} = profile;
+    const fields = [name, email].map(field => field.trim());
+
+    if (fields.includes('')) {
+      setAlert({
+        msg: 'Name and Email are necessary',
+        error: true
+      });
+      return;
+    }
+
+    setAlert({});
+
+    const result = await updateProfile(profile);
+    setAlert(result);
+  }
+
   return (
     <>
       <AdminNav />
@@ -14,7 +45,8 @@ const EditProfile = () => {
 
       <div className='flex justify-center'>
         <div className="w-full md:w-1/2 bg-white shadow rounded-lg p-5">
-          <form>
+          {alert.msg && <Alert alertObj={alert} />}
+          <form onSubmit={handleSubmit}>
             <div className="my-3">
               <label className="uppercase font-bold text-gray-600">
                 Name
@@ -23,6 +55,11 @@ const EditProfile = () => {
                 type='text'
                 className='border bg-gray-50 w-full p-2 mt-5 rounded-lg'
                 name='name'
+                value={profile.name || ''}
+                onChange={(e)=> setProfile({
+                  ...profile,
+                  [e.target.name]: e.target.value
+                })}
               />
             </div>
 
@@ -34,6 +71,11 @@ const EditProfile = () => {
                 type='text'
                 className='border bg-gray-50 w-full p-2 mt-5 rounded-lg'
                 name='web'
+                value={profile.web || ''}
+                onChange={(e)=> setProfile({
+                  ...profile,
+                  [e.target.name]: e.target.value
+                })}
               />
             </div>
 
@@ -44,7 +86,12 @@ const EditProfile = () => {
               <input 
                 type='text'
                 className='border bg-gray-50 w-full p-2 mt-5 rounded-lg'
-                name='phone-number'
+                name='phoneNumber'
+                value={profile.phoneNumber || ''}
+                onChange={(e)=> setProfile({
+                  ...profile,
+                  [e.target.name]: e.target.value
+                })}
               />
             </div>
 
@@ -55,6 +102,12 @@ const EditProfile = () => {
               <input 
                 type='text'
                 className='border bg-gray-50 w-full p-2 mt-5 rounded-lg'
+                value={profile.email || ''}
+                name='email'
+                onChange={(e)=> setProfile({
+                  ...profile,
+                  [e.target.name]: e.target.value
+                })}
               />
             </div>
 

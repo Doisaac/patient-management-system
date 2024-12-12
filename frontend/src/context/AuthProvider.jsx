@@ -43,13 +43,47 @@ const AuthProvider = ({ children }) => {
     setAuth({});
   }
 
+  const updateProfile = async (profile) => {
+    const token = localStorage.getItem('token');
+      
+    // In case there is no token
+    if (!token) {
+      setLoading(false);
+      return;
+    } 
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    };
+
+    try {
+      const url = `/veterinarians/profile/${profile._id}`;
+      await axiosClient.put(url, profile, config);
+
+      return {
+        msg: 'Edited Correctly',
+        error: false
+      }
+    } catch (error) {
+      return {
+        msg: error.response.data.msg,
+        error: true
+      }
+    }
+  }
+
+
   return (
     <AuthContext.Provider 
       value={{
         auth,
         setAuth,
         loading,
-        logOut
+        logOut,
+        updateProfile
       }}
     >
       { children }
