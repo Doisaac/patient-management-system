@@ -5,7 +5,7 @@ const EditProfile = () => {
     <>
       <AdminNav />
 
-      <h2 className="font-black text-3xl text-center mt-10">Change Password</h2>
+      <h2 className="font-black text-3xl text-center mt-10">Edit your Profile</h2>
 
       <p className="text-xl mt-5 mb-10 text-center">
         Modify your {''}
