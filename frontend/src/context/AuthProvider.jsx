@@ -75,38 +75,38 @@ const AuthProvider = ({ children }) => {
     }
   }
 
-  // const savePassword = async (passwords) => {
-  //   const token = localStorage.getItem('token');
+  const savePassword = async (passwords) => {
+    const token = localStorage.getItem('token');
       
-  //   // In case there is no token
-  //   if (!token) {
-  //     setLoading(false);
-  //     return;
-  //   } 
+    // In case there is no token
+    if (!token) {
+      setLoading(false);
+      return;
+    } 
 
-  //   const config = {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Authorization": `Bearer ${token}`
-  //     }
-  //   };;
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    };;
 
-  //   try {
-  //     const url = `/veterinarians/updatePassword`;
+    try {
+      const url = `/veterinarians/updatePassword`;
 
-  //     const {data} = await axiosClient.put(url, passwords, config);
-      
-  //     return {
-  //       msg: data.msg,
-  //       error: false
-  //     }
-  //   } catch (error) {
-  //     return {
-  //       msg: error.response.data.msg,
-  //       error: true
-  //     }
-  //   }
-  // }
+      const {data} = await axiosClient.put(url, passwords, config);
+      console.log(data);
+      return {
+        msg: data.msg,
+        error: false
+      }
+    } catch (error) {
+      return {
+        msg: error.response.data.msg,
+        error: true
+      }
+    }
+  }
 
   return (
     <AuthContext.Provider 

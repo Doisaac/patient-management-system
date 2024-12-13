@@ -2,7 +2,6 @@ import { useState } from "react"
 import AdminNav from "../components/AdminNav"
 import Alert from "../components/Alert"
 import useAuth from "../hooks/useAuth"
-import { updatePassword } from "../../../backend/controllers/veterinarianController"
 
 const ChangePassword = () => {
   const [alert, setAlert] = useState({});
@@ -12,31 +11,31 @@ const ChangePassword = () => {
   });
   const { savePassword } = useAuth();
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     
-  //   if (Object.values(password).some(field => field === '')){
-  //     setAlert({
-  //       msg: 'Please complete all the fields',
-  //       error: true
-  //     })
+    if (Object.values(password).some(field => field === '')){
+      setAlert({
+        msg: 'Please complete all the fields',
+        error: true
+      })
 
-  //     return;
-  //   }
+      return;
+    }
 
-  //   if (password.password.length < 6) {
-  //     setAlert({
-  //       msg: 'The new password is too short',
-  //       error: true
-  //     })
+    if (password.password.length < 6) {
+      setAlert({
+        msg: 'The new password is too short',
+        error: true
+      })
 
-  //     return;
-  //   }
+      return;
+    }
     
-  //   savePassword(password);
-  //   // const response = await updatePassword(password);
-  //   // console.log(response);
-  // }
+    const response = await savePassword(password);
+    // const response = await updatePassword(password);
+    console.log(response);
+  }
 
   return (
     <>
