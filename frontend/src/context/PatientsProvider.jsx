@@ -1,11 +1,13 @@
 import { createContext, useState, useEffect} from 'react'
 import axiosClient from '../config/axios'
+import useAuth from '../hooks/useAuth';
 
 const PatientsContext = createContext();
 
 export const PatientsProvider = ({children}) => {
   const [patients, setPatients] = useState([]);
   const [patient, setPatient] = useState({});
+  const { auth } = useAuth();
 
   useEffect(() => {
     const getPatients = async() => {
@@ -27,7 +29,7 @@ export const PatientsProvider = ({children}) => {
       }
     }
     getPatients();
-  }, []);
+  }, [auth]);
 
   const savePatient = async (patient) => {
     const token = localStorage.getItem('token');
