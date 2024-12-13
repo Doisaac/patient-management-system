@@ -95,7 +95,7 @@ const AuthProvider = ({ children }) => {
       const url = `/veterinarians/updatePassword`;
 
       const {data} = await axiosClient.put(url, passwords, config);
-      console.log(data);
+
       return {
         msg: data.msg,
         error: false

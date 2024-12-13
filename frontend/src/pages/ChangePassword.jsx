@@ -33,8 +33,7 @@ const ChangePassword = () => {
     }
     
     const response = await savePassword(password);
-    // const response = await updatePassword(password);
-    console.log(response);
+    setAlert(response);
   }
 
   return (
