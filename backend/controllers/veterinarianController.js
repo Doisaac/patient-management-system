@@ -194,6 +194,33 @@ const updateProfile = async (req, res) => {
   }
 }
 
+const updatePassword = async (req, res) => {
+  // Reads the dat
+  const { _id } = req.veterinarian;
+  const {current_pwd, password} = req.body;
+
+  // Checks if the user exists
+  const veterinarian = await Veterinarian.findById(_id);
+
+  if (!veterinarian) {
+    const error = new Error('There was an error');
+    return res.status(400).json({ msg: error.msg });
+  }
+
+  // Checks old password
+  if (await veterinarian.checkPassword(current_pwd)) {
+    // Saves new password
+    veterinarian.password = password;
+    await veterinarian.save();
+    res.json({msg: 'Password Updated correctly'})
+  } else {
+    console.log('hey');
+    const error = new Error('The current password is incorrect');
+    return res.status(400).json({ msg: error.message });
+  }
+
+}
+
 export {
   register,
   profile,
@@ -202,5 +229,6 @@ export {
   forgetPassword,
   checkPasswordToken,
   saveNewPassword,
-  updateProfile
+  updateProfile,
+  updatePassword
 };

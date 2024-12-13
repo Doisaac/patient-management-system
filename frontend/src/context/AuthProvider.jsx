@@ -75,6 +75,38 @@ const AuthProvider = ({ children }) => {
     }
   }
 
+  // const savePassword = async (passwords) => {
+  //   const token = localStorage.getItem('token');
+      
+  //   // In case there is no token
+  //   if (!token) {
+  //     setLoading(false);
+  //     return;
+  //   } 
+
+  //   const config = {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Authorization": `Bearer ${token}`
+  //     }
+  //   };;
+
+  //   try {
+  //     const url = `/veterinarians/updatePassword`;
+
+  //     const {data} = await axiosClient.put(url, passwords, config);
+      
+  //     return {
+  //       msg: data.msg,
+  //       error: false
+  //     }
+  //   } catch (error) {
+  //     return {
+  //       msg: error.response.data.msg,
+  //       error: true
+  //     }
+  //   }
+  // }
 
   return (
     <AuthContext.Provider 
@@ -83,7 +115,8 @@ const AuthProvider = ({ children }) => {
         setAuth,
         loading,
         logOut,
-        updateProfile
+        updateProfile,
+        savePassword
       }}
     >
       { children }
