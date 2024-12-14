@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import { AuthProvider } from './context/authProvider.jsx'
+import { AuthProvider } from './context/AuthProvider.jsx'
 import { PatientsProvider } from './context/PatientsProvider.jsx'
 import AuthLayout from './layout/AuthLayout'
 import RestrictedArea from './layout/RestrictedArea.jsx'
