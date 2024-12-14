@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth'
 import Alert from '../components/Alert';
 
 const EditProfile = () => {
-  const { auth, updateProfile } = useAuth();
+  const { auth, updateProfile, setAuth } = useAuth();
   const [ profile, setProfile ] = useState({});
   const [ alert, setAlert ] = useState({}); 
   
@@ -30,6 +30,7 @@ const EditProfile = () => {
 
     const result = await updateProfile(profile);
     setAlert(result);
+    setAuth(profile);
   }
 
   return (
