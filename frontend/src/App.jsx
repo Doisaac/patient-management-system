@@ -10,7 +10,7 @@ import ConfirmAccount from './pages/ConfirmAccount'
 import NewPassword from './pages/NewPassword'
 import Admin from './pages/Admin.jsx'
 import EditProfile from './pages/EditProfile.jsx'
-import ChangePassword from './pages/changePassword.jsx'
+import ChangePassword from './pages/ChangePassword.jsx'
 
 function App() {
 
