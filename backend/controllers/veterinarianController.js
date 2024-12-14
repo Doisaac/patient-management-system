@@ -88,7 +88,9 @@ const authenticate = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      token: generateJWT(user._id)
+      token: generateJWT(user._id),
+      web: user.web,
+      phoneNumber: user.phoneNumber
     });
   } else {
     const error = new Error('The password is incorrect');
