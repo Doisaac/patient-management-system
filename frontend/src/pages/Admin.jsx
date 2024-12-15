@@ -10,7 +10,7 @@ const Admin = () => {
       <div className="flex flex-col md:flex-row">
         <button
           type="button"
-          className="bg-indigo-600 text-white font-bold uppercase mx-10 p-3 rounded-md md:hidden"
+          className="bg-indigo-600 text-white font-bold uppercase mx-10 p-3 rounded-md md:hidden mb-5"
           onClick={() => {setShowForm(!showForm)}}
         > 
           {showForm ? 'Hide Form ' : 'Show Form'}
